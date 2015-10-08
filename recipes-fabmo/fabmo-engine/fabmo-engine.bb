@@ -4,6 +4,8 @@ LICENSE = "Apache-2.0"
 SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 SRCREV = "${AUTOREV}"
 
+DEPENDS = "dbus-glib expat"
+
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 S = "${WORKDIR}/git"
@@ -11,6 +13,7 @@ S = "${WORKDIR}/git"
 inherit npm
 
 NPM_INSTALL_FLAGS += " --build-from-source"
+
 
 do_compile() {
     oe_runnpm install

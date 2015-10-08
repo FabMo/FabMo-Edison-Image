@@ -64,9 +64,9 @@ IMAGE_INSTALL += "pciutils"
 IMAGE_INSTALL += "usbutils"
 IMAGE_INSTALL += "ldd"
 IMAGE_INSTALL += "i2c-tools"
-IMAGE_INSTALL += "watchdog-sample"
+#IMAGE_INSTALL += "watchdog-sample"
 IMAGE_INSTALL += "pwr-button-handler"
-IMAGE_INSTALL += "blink-led"
+#IMAGE_INSTALL += "blink-led"
 IMAGE_INSTALL += "post-install"
 IMAGE_INSTALL += "resize-rootfs"
 IMAGE_INSTALL += "systemd-analyze"
@@ -142,7 +142,7 @@ IMAGE_INSTALL += "iotkit-comm-c-dev"
 IMAGE_INSTALL += "iotkit-agent"
 IMAGE_INSTALL += "iotkit-lib-c-dev"
 IMAGE_INSTALL += "xdk-daemon"
-#IMAGE_INSTALL += "oobe"
+IMAGE_INSTALL += "oobe"
 
 # mosquitto and dependencies
 #IMAGE_INSTALL += "mosquitto-dev"
@@ -159,14 +159,12 @@ IMAGE_INSTALL += "mraa-doc"
 # UPM
 IMAGE_INSTALL += "upm-dev"
 
-
-
 # INTEL MCU FW
 IMAGE_INSTALL += "mcu-fw-load"
 IMAGE_INSTALL += "mcu-fw-bin"
 
 # nfs
-IMAGE_INSTALL += "nfs-utils"
+#IMAGE_INSTALL += "nfs-utils"
 
 # Add oFono
 #IMAGE_INSTALL += "ofono"
