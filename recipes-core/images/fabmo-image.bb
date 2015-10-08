@@ -172,5 +172,5 @@ IMAGE_INSTALL += "mcu-fw-bin"
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
 
-
+IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "fabmo-engine"
