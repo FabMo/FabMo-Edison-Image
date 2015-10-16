@@ -150,7 +150,7 @@ IMAGE_INSTALL += "oobe"
 
 # node and sub-components
 #IMAGE_INSTALL += "nodejs-dev"
-#IMAGE_INSTALL += "nodejs-npm"
+IMAGE_INSTALL += "nodejs-npm"
 
 # MRAA
 IMAGE_INSTALL += "mraa-dev"
@@ -172,5 +172,6 @@ IMAGE_INSTALL += "mcu-fw-bin"
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
 
-IMAGE_INSTALL += "vim"
+IMAGE_INSTALL += "vim-tiny"
+IMAGE_INSTALL += "nano"
 IMAGE_INSTALL += "fabmo-engine"

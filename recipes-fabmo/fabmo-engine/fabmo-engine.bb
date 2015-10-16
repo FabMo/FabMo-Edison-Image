@@ -5,7 +5,7 @@ SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 SRCREV = "${AUTOREV}"
 
 DEPENDS = "dbus-glib expat"
-RDEPENDS_${PN} = "git bash"
+RDEPENDS_${PN} = "git bash nodejs-npm"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
