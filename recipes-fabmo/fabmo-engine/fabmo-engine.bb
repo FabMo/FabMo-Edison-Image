@@ -1,8 +1,8 @@
 DESCRIPTION="The FabMo Engine Service"
 LICENSE = "Apache-2.0"
  
-SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
-SRCREV = "${AUTOREV}"
+#SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
+#SRCREV = "${AUTOREV}"
 
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -15,17 +15,19 @@ inherit npm
 
 NPM_INSTALL_FLAGS += " --build-from-source"
 
+do_fetch() {
+	git clone https://github.com/FabMo/FabMo-Engine.git ${S} --depth=1
+}
 
 do_compile() {
     oe_runnpm install
 }
 
 do_install() {
-    install -d ${D}/fabmo
     install -d ${D}/opt/fabmo
     install -d ${D}${systemd_unitdir}/system
-    mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
-    cp -r ${S}/* ${D}/fabmo
+    #mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
+    cp -r ${S} ${D}/fabmo
     install -m 0644 ${S}/conf/fabmo.service ${D}${systemd_unitdir}/system/
 }
 

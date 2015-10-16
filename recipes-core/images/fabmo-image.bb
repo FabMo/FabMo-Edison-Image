@@ -64,9 +64,9 @@ IMAGE_INSTALL += "pciutils"
 IMAGE_INSTALL += "usbutils"
 IMAGE_INSTALL += "ldd"
 IMAGE_INSTALL += "i2c-tools"
-#IMAGE_INSTALL += "watchdog-sample"
+IMAGE_INSTALL += "watchdog-sample"
 IMAGE_INSTALL += "pwr-button-handler"
-#IMAGE_INSTALL += "blink-led"
+IMAGE_INSTALL += "blink-led"
 IMAGE_INSTALL += "post-install"
 IMAGE_INSTALL += "resize-rootfs"
 IMAGE_INSTALL += "systemd-analyze"
@@ -127,7 +127,7 @@ IMAGE_INSTALL += "swig"
 
 
 # Edison Arduino stuff
-#IMAGE_INSTALL += "clloader"
+IMAGE_INSTALL += "clloader"
 
 
 # Edison Middleware stuff
