@@ -2,13 +2,14 @@ DESCRIPTION = "Edison image customized for FabMo"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 LICENSE = "MIT"
+
 IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
 IMAGE_INSTALL += "openssh-sftp-server"
 
 IMAGE_LINGUAS = " "
 
-INITRD = ""
-INITRD_IMAGE = ""
+#INITRD = ""
+#INITRD_IMAGE = ""
 
 # Do not use legacy nor EFI BIOS
 PCBIOS = "0"
@@ -26,7 +27,7 @@ LABELS_append = " ${SYSLINUX_LABELS} "
 
 
 # Specify rootfs image type
-IMAGE_FSTYPES = "ext4"
+IMAGE_FSTYPES = "live ext3 ext4"
 
 inherit core-image
 
@@ -40,8 +41,8 @@ do_bootimg[depends] += "${PN}:do_rootfs"
 IMAGE_ROOTFS_SIZE = "524288"
 
 IMAGE_FEATURES += "package-management ssh-server-openssh"
-# Allow passwordless root login and postinst logging
 IMAGE_FEATURES += "debug-tweaks"
+IMAGE_FEATURES += "read-only-rootfs"
 
 IMAGE_INSTALL += "connman"
 IMAGE_INSTALL += "connman-client"
@@ -71,6 +72,7 @@ IMAGE_INSTALL += "post-install"
 IMAGE_INSTALL += "resize-rootfs"
 IMAGE_INSTALL += "systemd-analyze"
 IMAGE_INSTALL += "wget"
+IMAGE_INSTALL += "aufs-util"
 
 # Allows to enable OpenMP feature
 #IMAGE_INSTALL += "libgomp"
@@ -172,6 +174,6 @@ IMAGE_INSTALL += "mcu-fw-bin"
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
 
-IMAGE_INSTALL += "vim-tiny"
+IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "nano"
 IMAGE_INSTALL += "fabmo-engine"
