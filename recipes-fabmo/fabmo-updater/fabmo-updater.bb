@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 S = "${WORKDIR}/git"
 
@@ -25,6 +25,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}/opt/fabmo
+    install -d ${D}/fabmo
     install -d ${D}${systemd_unitdir}/system
     #mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
     cp -r ${S} ${D}/fabmo/updater

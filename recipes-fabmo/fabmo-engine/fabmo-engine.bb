@@ -24,11 +24,12 @@ do_compile() {
 }
 
 do_install() {
+    install -d ${D}/fabmo
     install -d ${D}/opt/fabmo
     install -d ${D}${systemd_unitdir}/system
     #mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
-    cp -r ${S} ${D}/fabmo
-    install -m 0644 ${S}/conf/fabmo.service ${D}${systemd_unitdir}/system/
+    cp -r ${S} ${D}/fabmo/engine
+    install -m 0644 ${S}/files/fabmo.service ${D}${systemd_unitdir}/system/
 }
 
 inherit systemd
