@@ -1,0 +1,74 @@
+#!/bin/sh
+
+OVERLAY_ROOT="/var/volatile/overlay/rw"
+MERGED_ROOT="/var/volatile/overlay/merged"
+MOUNT_ROOT="/var/volatile/overlay/mnt"
+
+do_add() {
+
+	mkdir -p $OVERLAY_ROOT
+	mkdir -p $MERGED_ROOT
+
+	target_dir="$1"
+	if [ -d "$target_dir" ]; then
+		overlay_rw_dir=$OVERLAY_ROOT$1
+		overlay_merged_dir=$MERGED_ROOT$1
+		if [ -d "$overlay_rw_dir" ] || [ -d "$overlay_merged_dir" ]; then 
+			echo $"Cannot create overlay: Overlay directory already exists."
+		else
+			mkdir -p $overlay_rw_dir
+			mkdir -p $overlay_merged_dir
+			mount -t aufs -o br=$overlay_rw_dir=rw:$target_dir=ro -o udba=reval none $overlay_merged_dir
+			mount --bind $overlay_merged_dir $target_dir
+		fi
+	else
+		echo $"Cannot create overlay: Target directory '$target_dir' does not exist."
+	fi
+}
+
+do_rm() {
+	if mount | grep -q "$MERGED_ROOT$1"; then
+		umount $MERGED_ROOT$1
+		umount $1
+		rm -rf $OVERLAY_ROOT$1 $MERGED_ROOT$1
+	else 
+		echo $"Cannot remove overlay: Overlay for $1 does not exist."	
+	fi
+}
+
+do_commit() {
+	case "$1" in
+		all)
+			
+			;;
+		*)
+			if mount | grep -q "$MERGED_ROOT$1"; then
+				root_device=`mount|grep ' / '|cut -d' ' -f 1`
+				mount $root_device $MOUNT_ROOT
+				cp -R $OVERLAY_ROOT$1 $MOUNT_ROOT$1
+				umount $MOUNT_ROOT
+			else
+				echo $"Cannot commit overlay: Overlay for $1 does not exist."
+			fi
+			;;
+	esac
+}
+
+case "$1" in 
+	add)
+		# Do some things
+		do_add $2
+		;;
+	rm)
+		do_rm $2
+		;;
+
+	commit)
+		do_commit $2
+		;;
+	*)
+		echo $"Usage: $0 {add|rm} directory"
+		exit 1
+esac
+
+
