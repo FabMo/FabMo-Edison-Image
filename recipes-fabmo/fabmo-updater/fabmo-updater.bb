@@ -1,8 +1,8 @@
 DESCRIPTION="The FabMo Updater Service"
 LICENSE = "Apache-2.0"
  
-#SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
-#SRCREV = "${AUTOREV}"
+SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
+SRCREV = "${AUTOREV}"
 
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -15,15 +15,16 @@ inherit npm
 
 NPM_INSTALL_FLAGS += " --build-from-source"
 
-do_fetch() {
-	git clone https://github.com/FabMo/FabMo-Updater.git ${S} --depth=1
-}
+#do_fetch() {
+#	git clone https://github.com/FabMo/FabMo-Updater.git ${S} --depth=1
+#}
 
 do_compile() {
     oe_runnpm install
 }
 
 do_install() {
+    install -d ${D}/opt
     install -d ${D}/opt/fabmo
     install -d ${D}/fabmo
     install -d ${D}${systemd_unitdir}/system
@@ -32,11 +33,20 @@ do_install() {
     install -m 0644 ${S}/files/fabmo-updater.service ${D}${systemd_unitdir}/system/
 }
 
+pkg_postinst_${PN}() {
+    #ln -s /home/fabmo /opt/fabmo
+}
+
 inherit systemd
 
 SYSTEMD_AUTO_ENABLE = "enable"
 SYSTEMD_SERVICE_${PN} = "fabmo-updater.service"
 
-FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr"
+inherit useradd
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = "-d /home/fabmo -r -s /bin/bash fabmo"
+
+FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home"
 
 PACKAGES = "${PN}"
