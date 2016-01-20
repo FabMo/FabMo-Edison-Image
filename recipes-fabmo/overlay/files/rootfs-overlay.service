@@ -1,0 +1,11 @@
+[Unit]
+Description=Read-Write Filesystem Overlay
+DefaultDependencies=false
+RequiresMountsFor=/ /var/volatile
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/overlay add /etc; /usr/bin/overlay add /usr
+
+[Install]
+WantedBy=sysinit.target
