@@ -5,7 +5,9 @@ RequiresMountsFor=/ /var/volatile
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/overlay add /etc; /usr/bin/overlay add /usr
+ExecStart=/usr/bin/overlay add /etc 
+ExecStart=/usr/bin/overlay add /usr
+ExecStart=/usr/bin/overlay add /var/log
 
 [Install]
 WantedBy=sysinit.target
