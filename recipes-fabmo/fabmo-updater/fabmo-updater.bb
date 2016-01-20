@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-
+PV = "1.1.0"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm"
 
@@ -16,12 +16,11 @@ inherit npm
 NPM_INSTALL_FLAGS += " --build-from-source"
 
 do_fetch() {
-	rm -rf ${S}
 	git clone https://github.com/FabMo/FabMo-Updater.git ${S} --depth=1
 }
 
 do_unpack() {
-	echo "Unpacking"
+    echo "Unpacking"
 }
 
 do_compile() {
@@ -39,6 +38,10 @@ do_install() {
     
     install -d ${D}/opt/fabmo/config
     echo '{"platform":"edison"}' > ${D}/opt/fabmo/config/updater.json
+}
+
+do_clean() {
+	rm -rf ${S}
 }
 
 pkg_postinst_${PN}() {
