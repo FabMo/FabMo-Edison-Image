@@ -28,16 +28,16 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/opt
-    install -d ${D}/opt/fabmo
+    #install -d ${D}/opt
+    #install -d ${D}/opt/fabmo
     install -d ${D}/fabmo
     install -d ${D}${systemd_unitdir}/system
     #mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
     cp -r ${S} ${D}/fabmo/updater
     install -m 0644 ${S}/files/fabmo-updater.service ${D}${systemd_unitdir}/system/
     
-    install -d ${D}/opt/fabmo/config
-    echo '{"platform":"edison"}' > ${D}/opt/fabmo/config/updater.json
+    #install -d ${D}/opt/fabmo/config
+    #echo '{"platform":"edison"}' > ${D}/opt/fabmo/config/updater.json
 }
 
 do_clean() {
@@ -45,7 +45,7 @@ do_clean() {
 }
 
 pkg_postinst_${PN}() {
-    #ln -s /home/fabmo /opt/fabmo
+    ln -s ${D}/home/fabmo ${D}/opt/fabmo
 }
 
 inherit systemd
