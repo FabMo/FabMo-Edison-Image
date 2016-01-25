@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "0.0.1"
+PV = "0.0.2"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -33,9 +33,9 @@ do_clean() {
 }
 
 do_install() {
-    install -d ${D}/opt
-    install -d ${D}/opt/fabmo
-    install -d ${D}/opt/fabmo/config
+#    install -d ${D}/opt
+#    install -d ${D}/opt/fabmo
+#    install -d ${D}/opt/fabmo/config
     install -d ${D}/fabmo
     install -d ${D}${systemd_unitdir}/system
     mv ${S}/node_modules/serialport/build/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/Release/node-v11-linux-ia32 || true
