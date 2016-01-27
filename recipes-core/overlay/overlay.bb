@@ -19,7 +19,7 @@ do_install() {
 
 inherit systemd
 
-SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_AUTO_ENABLE = "disable"
 SYSTEMD_SERVICE_${PN} = "rootfs-overlay.service"
 
 FILES_${PN} = "${systemd_unitdir}/system ${bindir}"
