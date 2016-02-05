@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 #SRCREV = "${AUTOREV}"
 PV = "1.2.4"
 DEPENDS = "dbus-glib expat"
-RDEPENDS_${PN} = "git bash nodejs-npm"
+RDEPENDS_${PN} = "git bash nodejs-npm bossa"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
