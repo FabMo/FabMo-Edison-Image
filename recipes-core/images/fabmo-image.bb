@@ -73,6 +73,7 @@ IMAGE_INSTALL += "resize-rootfs"
 IMAGE_INSTALL += "systemd-analyze"
 IMAGE_INSTALL += "wget"
 IMAGE_INSTALL += "aufs-util"
+IMAGE_INSTALL += "setserial"
 
 # Allows to enable OpenMP feature
 #IMAGE_INSTALL += "libgomp"
