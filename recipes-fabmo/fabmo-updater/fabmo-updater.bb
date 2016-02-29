@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.5.2"
+PV = "1.3.9"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm bossa"
 
@@ -28,29 +28,36 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/opt
-    #install -d ${D}/opt/fabmo
+    # Install the updater 
     install -d ${D}/fabmo
-    install -d ${D}${systemd_unitdir}/system
-    #mv ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/serialport/v1.7.4/Release/node-v11-linux-ia32
     cp -r ${S} ${D}/fabmo/updater
+    
+    # Install the systemd unit file
+    install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/files/fabmo-updater.service ${D}${systemd_unitdir}/system/
     
-    #install -d ${D}/opt/fabmo/config
-    #echo '{"platform":"edison"}' > ${D}/opt/fabmo/config/updater.json
+    # Install the factory backup and required scripts
+    install -d ${D}/usr/lib/fabmo
+    install -d ${D}${bindir}
+    tar -cvjf ${D}/usr/lib/fabmo/updater-factory.tar.bz2 -C ${D}/fabmo/updater .
+    install -m 0755 ${THISDIR}/files/factory_reset.sh ${D}/usr/lib/fabmo/    
+    install -m 0755 ${THISDIR}/files/fabmo-factory-reset ${D}${bindir}    
     
+    # Link the /opt/fabmo configuration path to the home directory (where configs are actually stored)
+    install -d ${D}/opt
     install -d ${D}/home/fabmo
     chown -R fabmo ${D}/home/fabmo
     lnr ${D}/home/fabmo ${D}/opt/fabmo
+
 }
 
 do_clean() {
 	rm -rf ${S}
 }
 
-pkg_postinst_${PN}() {
-    ln -s ${D}/home/fabmo ${D}/opt/fabmo
-}
+#pkg_postinst_${PN}() {
+#    ln -s ${D}/home/fabmo ${D}/opt/fabmo
+#}
 
 inherit systemd
 
@@ -62,6 +69,6 @@ inherit useradd
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "-d /home/fabmo -r -s /bin/bash fabmo"
 
-FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home"
+FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home ${bindir}"
 
 PACKAGES = "${PN}"

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+invalid=true
+doit=false
+
+echo "This will reset your tool software to its factory configuration.  You will lose all data. Are you SURE you want to do this?"
+echo ""
+while $invalid; do
+	read -p "Please type yes or no: " choice
+	case "$choice" in 
+  		[yY][eE][sS] ) 	
+			invalid=false
+			doit=true
+		;;
+  		n|N ) 
+			invalid=false
+		;;
+  	* ) ;;
+esac
+done 
+
+if $doit; then
+	/usr/lib/fabmo/factory_reset.sh
+fi
