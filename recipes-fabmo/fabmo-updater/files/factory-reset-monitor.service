@@ -1,0 +1,10 @@
+[Unit]
+Description=Factory Reset Monitor
+
+[Service]
+ExecStart=/usr/bin/pwr_button_handler "/bin/echo" "/bin/systemctl start factory-reset" "/usr/lib/fabmo/enter_ap_mode.sh"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

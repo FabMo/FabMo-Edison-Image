@@ -1,0 +1,10 @@
+[Unit]
+Description=Factory Reset
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/fabmo/factory_reset.sh
+
+[Install]
+WantedBy=default.target
+

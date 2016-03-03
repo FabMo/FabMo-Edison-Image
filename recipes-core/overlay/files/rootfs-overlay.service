@@ -8,6 +8,7 @@ Type=oneshot
 ExecStart=/usr/bin/overlay add /etc 
 ExecStart=/usr/bin/overlay add /usr
 ExecStart=/usr/bin/overlay add /var/log
+ExecStart=/usr/bin/overlay add /var/lib
 ExecStart=/usr/bin/overlay add /lib
 
 [Install]

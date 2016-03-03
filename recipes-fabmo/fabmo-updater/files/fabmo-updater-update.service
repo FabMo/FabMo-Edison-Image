@@ -1,0 +1,10 @@
+[Unit]
+Description=FabMo Updater Update
+
+[Service]
+Type=forking
+ExecStart=/usr/lib/fabmo/updater_update.sh release
+
+[Install]
+WantedBy=default.target
+

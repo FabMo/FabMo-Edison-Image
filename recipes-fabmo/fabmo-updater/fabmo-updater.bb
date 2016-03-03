@@ -3,9 +3,9 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.3.9"
+PV = "1.4.10"
 DEPENDS = "dbus-glib expat"
-RDEPENDS_${PN} = "git bash nodejs-npm bossa"
+RDEPENDS_${PN} = "git bash nodejs-npm bossa factory-reset"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
@@ -35,12 +35,15 @@ do_install() {
     # Install the systemd unit file
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/files/fabmo-updater.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${THISDIR}/files/fabmo-updater-update.service ${D}${systemd_unitdir}/system/
     
     # Install the factory backup and required scripts
     install -d ${D}/usr/lib/fabmo
     install -d ${D}${bindir}
     tar -cvjf ${D}/usr/lib/fabmo/updater-factory.tar.bz2 -C ${D}/fabmo/updater .
     install -m 0755 ${THISDIR}/files/factory_reset.sh ${D}/usr/lib/fabmo/    
+    install -m 0755 ${THISDIR}/files/updater_update.sh ${D}/usr/lib/fabmo/    
+    install -m 0755 ${THISDIR}/files/enter_ap_mode.sh ${D}/usr/lib/fabmo/    
     install -m 0755 ${THISDIR}/files/fabmo-factory-reset ${D}${bindir}    
     
     # Link the /opt/fabmo configuration path to the home directory (where configs are actually stored)

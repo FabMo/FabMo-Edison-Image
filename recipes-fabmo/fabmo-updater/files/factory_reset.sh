@@ -5,10 +5,10 @@ echo "  FACTORY UPDATE.  DO NOT INTERRUPT POWER DURING THIS PROCESS."
 echo "----------------------------------------------------------------"
 
 echo "Stopping the engine and updater services..."
-systemctl stop fabmo fabmo-updater
+systemctl stop fabmo fabmo-updater factory-reset-monitor
 
-echo "Removing the user data directory..."
-rm -rf /opt/fabmo
+echo "Removing the contents of the user data directory..."
+rm -rf /opt/fabmo/*
 
 echo "Remounting root partition as read/write..."
 mount -w -o remount /
@@ -34,19 +34,13 @@ echo "Installing the engine service..."
 cp /fabmo/engine/files/fabmo.service /etc/systemd/system
 systemctl daemon-reload
 systemctl enable fabmo
+# /DANGER ZONE
 echo "Synchronizing flash..."
 sync
+sleep 3
 
-# /DANGER ZONE
-
-echo "Re-locking the root partition"
+echo "Re-locking root partition..."
 mount -r -o remount /
 
-echo "Restarting the engine and updater..."
-echo "(This will probably result in a network reset that will disconnect you...)"
-systemctl start fabmo-updater fabmo
-
-echo "Performing engine first-run tasks..."
-sleep 30
-
-echo "Factory reset is complete.  It is now safe to power down your tool."
+echo "Restarting services..."
+systemctl start fabmo fabmo-updater factory-reset-monitor
