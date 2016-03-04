@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.10"
+PV = "1.4.12"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -17,7 +17,11 @@ inherit npm
 NPM_INSTALL_FLAGS += " --build-from-source"
 
 do_fetch() {
-	git clone https://github.com/FabMo/FabMo-Engine.git ${S} --depth=1
+	git clone https://github.com/FabMo/FabMo-Engine.git ${S}
+	cd ${S}
+	git fetch origin --tags
+	git fetch origin release:release
+	git fetch origin rc:rc
 }
 
 do_unpack() {
