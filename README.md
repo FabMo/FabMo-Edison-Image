@@ -14,6 +14,11 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 - `make setup`
 - `cd out/current`
 - `source poky/oe-init-build-env`
+- edit ./conf/bblayers.conf
+- add lines to the BBLAYERS section
+  - /home/user/FabMo-Build/edison-src/meta-nodejs \
+  - /home/user/FabMo-Build/edison-src/FabMo-Edison-Image \
+  - /home/user/FabMo-Build/edison-src/meta-openembedded \
 - `bitbake fabmo-image`
 - Pray for it to build.
 
