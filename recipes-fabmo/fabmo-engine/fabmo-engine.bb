@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.12"
+PV = "1.4.19"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -22,6 +22,9 @@ do_fetch() {
 	git fetch origin --tags
 	git fetch origin release:release
 	git fetch origin rc:rc
+	git checkout release
+	VERSION=`git describe`
+	echo "{\"number\" : \"$VERSION\" }" > version.json
 }
 
 do_unpack() {

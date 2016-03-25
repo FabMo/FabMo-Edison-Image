@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "-----------------------"
+echo "FabMo Post-Installation"
+echo "-----------------------"
+
+echo "Making a backup of the original fstab"
+cp /etc/fstab /etc/fstab.backup
+
+echo "Marking the rootfs as READ ONLY"
+sed -r "s:rootfs\\s+/\\s+auto\\s+:&ro,errors=remount-ro,:" < /etc/fstab > /etc/fstab.ro; mv /etc/fstab.ro /etc/fstab
+
+echo "Enable the rootfs RAM overlay service"
+systemctl enable rootfs-overlay
+
+# Synchronize filesystems
+echo "Synchronizing filesystems"
+sync
