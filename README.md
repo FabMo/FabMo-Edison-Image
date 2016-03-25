@@ -19,5 +19,5 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 
 #Dependencies
 ##Ubuntu
-- makeinfo
-- chrpath
+- makeinfo (`sudo apt-get install texinfo`)
+- chrpath (`sudo apt-get install chrpath`)
