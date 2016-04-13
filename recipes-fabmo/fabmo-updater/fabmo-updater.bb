@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.21"
+PV = "1.4.30"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm bossa factory-reset"
 
