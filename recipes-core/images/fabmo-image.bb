@@ -175,7 +175,8 @@ IMAGE_INSTALL += "mcu-fw-bin"
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
 
-IMAGE_INSTALL += "ffmpeg"
+# removed temporary, ffmpeg is not included in edison receipe anymore
+#IMAGE_INSTALL += "ffmpeg"
 
 IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "nano"
