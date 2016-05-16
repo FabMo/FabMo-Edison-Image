@@ -1,6 +1,6 @@
 do_install_append() {
-        echo "FabMo Engine Linux v1.5.0\\n" > ${D}${sysconfdir}/issue
-        echo "FabMo Engine Linux v1.5.0\\n" > ${D}${sysconfdir}/issue.net
+        echo "FabMo Engine Linux v1.5.1\\n" > ${D}${sysconfdir}/issue
+        echo "FabMo Engine Linux v1.5.1\\n" > ${D}${sysconfdir}/issue.net
 	echo "fabmo" > ${D}${sysconfdir}/hostname
 
     	install -d ${D}${sysconfdir}/systemd/network

@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.22"
+PV = "1.4.26"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"

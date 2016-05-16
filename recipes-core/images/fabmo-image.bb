@@ -116,7 +116,8 @@ IMAGE_INSTALL += "iperf"
 #IMAGE_INSTALL += "pulseaudio-server libpulsecore libpulsecommon libpulse libpulse-simple pulseaudio-misc pulseaudio-service"
 
 #Add Gstreamer
-#IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-meta-base gstreamer1.0-meta-audio"
+IMAGE_INSTALL += "gstreamer1.0 gstreamer1.0-meta-base gstreamer1.0-meta-audio"
+IMAGE_INSTALL += "gst-plugins-good gst-plugins-good-video4linux2 gst-plugins-good-meta "
 
 # Those are necessary to manually create partitions and file systems on the eMMC
 IMAGE_INSTALL += "parted"
@@ -174,9 +175,6 @@ IMAGE_INSTALL += "mcu-fw-bin"
 
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
-
-# removed temporary, ffmpeg is not included in edison receipe anymore
-#IMAGE_INSTALL += "ffmpeg"
 
 IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "nano"
