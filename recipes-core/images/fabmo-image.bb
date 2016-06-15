@@ -40,14 +40,14 @@ do_bootimg[depends] += "${PN}:do_rootfs"
 
 IMAGE_ROOTFS_SIZE = "524288"
 
-IMAGE_FEATURES += "package-management ssh-server-openssh"
+IMAGE_FEATURES += "package-management dev-pkgs ssh-server-openssh"
 IMAGE_FEATURES += "debug-tweaks"
 IMAGE_FEATURES += "read-only-rootfs"
 
-IMAGE_INSTALL += "connman"
-IMAGE_INSTALL += "connman-client"
-IMAGE_INSTALL += "connman-tools"
-IMAGE_INSTALL += "connman-init-systemd"
+#IMAGE_INSTALL += "connman"
+#IMAGE_INSTALL += "connman-client"
+#IMAGE_INSTALL += "connman-tools"
+#IMAGE_INSTALL += "connman-init-systemd"
 IMAGE_INSTALL += "ap-mode-toggle"
 IMAGE_INSTALL += "wireless-tools"
 IMAGE_INSTALL += "wpa-supplicant"
@@ -175,6 +175,10 @@ IMAGE_INSTALL += "mcu-fw-bin"
 
 # Add battery level detection
 #IMAGE_INSTALL += "battery-voltage"
+
+
+# Add dev tools
+IMAGE_INSTALL += "autoconf automake binutils binutils-symlinks cpp cpp-symlinks gcc gcc-symlinks g++ g++-symlinks gettext make libstdc++ libstdc++-dev file coreutils"
 
 IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "nano"

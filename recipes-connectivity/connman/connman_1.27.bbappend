@@ -1,3 +1,3 @@
 inherit systemd
 
-SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_AUTO_ENABLE = "disable"
