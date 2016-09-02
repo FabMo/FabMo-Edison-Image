@@ -14,19 +14,22 @@ import re
 import termios
 import select
 
-tty = open('/dev/tty', 'r+')
-tty.write('\033[7\033[r\033[999;999H\033[6n')
-tty.flush()
+try:
+    tty = open('/dev/tty', 'r+')
+    tty.write('\033[7\033[r\033[999;999H\033[6n')
+    tty.flush()
 
-fd = sys.stdin.fileno()
+    fd = sys.stdin.fileno()
 
-oldterm = termios.tcgetattr(fd)
-newattr = oldterm[:]
-newattr[3] = newattr[3] & ~termios.ICANON & ~termios.ECHO
-termios.tcsetattr(fd, termios.TCSANOW, newattr)
+    oldterm = termios.tcgetattr(fd)
+    newattr = oldterm[:]
+    newattr[3] = newattr[3] & ~termios.ICANON & ~termios.ECHO
+    termios.tcsetattr(fd, termios.TCSANOW, newattr)
 
-oldflags = fcntl.fcntl(fd, fcntl.F_GETFL)
-fcntl.fcntl(fd, fcntl.F_SETFL, oldflags | os.O_NONBLOCK)
+    oldflags = fcntl.fcntl(fd, fcntl.F_GETFL)
+    fcntl.fcntl(fd, fcntl.F_SETFL, oldflags | os.O_NONBLOCK)
+except:
+    sys.exit()
 
 try:
     while True:
@@ -38,9 +41,13 @@ finally:
     termios.tcsetattr(fd, termios.TCSAFLUSH, oldterm)
     fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
 
-rows, cols = map(int, re.findall(r'\d+', output))
+try:
+    rows, cols = map(int, re.findall(r'\d+', output))
 
-fcntl.ioctl(fd, termios.TIOCSWINSZ,
-            struct.pack("HHHH", rows, cols, 0, 0))
+    fcntl.ioctl(fd, termios.TIOCSWINSZ,
+                struct.pack("HHHH", rows, cols, 0, 0))
 
-print "\nReset the terminal to", rows, "rows", cols, "cols"
+    print "\nReset the terminal to", rows, "rows", cols, "cols"
+except:
+    pass
+
