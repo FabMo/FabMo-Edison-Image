@@ -16,6 +16,11 @@ sed -r "s:rootfs\\s+/\\s+auto\\s+:&ro,errors=remount-ro,:" < /etc/fstab > /etc/f
 echo "Enable the rootfs RAM overlay service"
 systemctl enable rootfs-overlay
 
+echo "Create site-specific installation files"
+mkdir -p /opt/fabmo/fmus
+
+
 # Synchronize filesystems
 echo "Synchronizing filesystems"
 sync
+

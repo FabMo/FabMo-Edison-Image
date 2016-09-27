@@ -37,10 +37,18 @@ systemctl enable fabmo
 # /DANGER ZONE
 echo "Synchronizing flash..."
 sync
-sleep 3
 
 echo "Re-locking root partition..."
 mount -r -o remount /
 
+echo "Loading site files..."
+mkdir -p /opt/fabmo/fmus
+cp /usr/lib/fabmo/fmus/*.fmu /opt/fabmo/fmus
+
+echo "Synchronizing flash..."
+sync
+
 echo "Restarting services..."
-systemctl start fabmo fabmo-updater factory-reset-monitor
+systemctl start fabmo-updater factory-reset-monitor
+sleep 30
+systemctl start fabmo

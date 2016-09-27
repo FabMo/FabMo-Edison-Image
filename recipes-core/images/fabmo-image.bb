@@ -183,4 +183,5 @@ IMAGE_INSTALL += "autoconf automake binutils binutils-symlinks cpp cpp-symlinks 
 IMAGE_INSTALL += "vim"
 IMAGE_INSTALL += "nano"
 IMAGE_INSTALL += "fabmo-engine"
+IMAGE_INSTALL += "handibot"
 IMAGE_INSTALL += "fabmo-post-install"

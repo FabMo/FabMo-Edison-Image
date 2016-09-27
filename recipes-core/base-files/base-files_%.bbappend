@@ -6,5 +6,5 @@ do_install_append() {
     	install -d ${D}${sysconfdir}/systemd/network
 	echo "[Match]\nName=en*\n[Network]\nDHCP=yes" > ${D}${sysconfdir}/systemd/network/ethernet-dhcp.network
 	
-    	lnr ${D}/etc/resolv.conf ${D}/run/systemd/network/resolv.conf
+    	lnr ${D}/run/systemd/network/resolv.conf ${D}/etc/resolv.conf
 }
