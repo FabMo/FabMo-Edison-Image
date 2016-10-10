@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.35"
+PV = "1.4.41"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"
@@ -25,6 +25,8 @@ do_fetch() {
 	git checkout release
 	VERSION=`git describe`
 	echo "{\"number\" : \"$VERSION\" }" > version.json
+	rm -rf .git
+        touch install_token
 }
 
 do_unpack() {
@@ -46,7 +48,7 @@ do_install() {
     mv ${S}/node_modules/serialport/build/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/Release/node-v11-linux-ia32 || true
     cp -r ${S} ${D}/fabmo/engine
     install -m 0644 ${S}/files/fabmo.service ${D}${systemd_unitdir}/system/
-    tar -cvjf ${D}/usr/lib/fabmo/engine-factory.tar.bz2 -C ${D}/fabmo/engine .
+    tar -cvjf ${D}/usr/lib/fabmo/engine-factory.tar.bz2 -C ${D}/fabmo/engine --exclude='*install_token' .
 }
 
 inherit systemd

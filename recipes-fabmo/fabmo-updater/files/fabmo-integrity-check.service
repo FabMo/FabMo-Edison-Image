@@ -1,0 +1,13 @@
+[Unit]
+Description=FabMo Software Integrity Check
+Before=fabmo.service fabmo-updater.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/fabmo/fabmo-integrity-check.sh
+Restart=no
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+

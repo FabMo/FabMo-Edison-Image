@@ -18,9 +18,12 @@ systemctl enable rootfs-overlay
 
 echo "Create site-specific installation files"
 mkdir -p /opt/fabmo/fmus
+cp /usr/lib/fabmo/fmus/*.fmu /opt/fabmo/fmus
 
 
 # Synchronize filesystems
 echo "Synchronizing filesystems"
 sync
 
+echo "Restart the updater"
+systemctl restart fabmo-updater

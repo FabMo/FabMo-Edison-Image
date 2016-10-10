@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.35"
+PV = "1.4.41"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm bossa factory-reset"
 
@@ -24,6 +24,8 @@ do_fetch() {
 	git checkout release
 	VERSION=`git describe`
 	echo "{\"number\" : \"$VERSION\" }" > version.json
+	rm -rf .git
+	touch install_token
 }
 
 do_unpack() {
@@ -47,7 +49,7 @@ do_install() {
     # Install the factory backup and required scripts
     install -d ${D}/usr/lib/fabmo
     install -d ${D}${bindir}
-    tar -cvjf ${D}/usr/lib/fabmo/updater-factory.tar.bz2 -C ${D}/fabmo/updater .
+    tar -cvjf ${D}/usr/lib/fabmo/updater-factory.tar.bz2 -C ${D}/fabmo/updater --exclude='*install_token' .
     install -m 0755 ${THISDIR}/files/factory_reset.sh ${D}/usr/lib/fabmo/    
     install -m 0755 ${THISDIR}/files/updater_update.sh ${D}/usr/lib/fabmo/    
     install -m 0755 ${THISDIR}/files/enter_ap_mode.sh ${D}/usr/lib/fabmo/    

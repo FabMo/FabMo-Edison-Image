@@ -13,6 +13,7 @@ RDEPENDS_${PN} = "bash"
 do_install() {
     install -d ${D}/usr/lib/fabmo/fmus    
     install -m 0755 ${WORKDIR}/01-firmware-update.fmu ${D}/usr/lib/fabmo/fmus
+    install -m 0755 ${WORKDIR}/02-handibot-production.fmu ${D}/usr/lib/fabmo/fmus
 }
 
 FILES_${PN} = "/usr/lib/fabmo/fmus/01-firmware-update.fmu /usr/lib/fabmo/fmus/02-handibot-production.fmu"
