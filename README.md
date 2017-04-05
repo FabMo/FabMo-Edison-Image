@@ -46,3 +46,4 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 ## Ubuntu
 - makeinfo (`sudo apt-get install texinfo`)
 - chrpath (`sudo apt-get install chrpath`)
+- g++-multilib (`sudo apt-get install g++-multilib`)
