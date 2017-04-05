@@ -1,10 +1,10 @@
 FabMo-Edison-Image
 ----------------------
 
-This is a yocto layer for furnishing the working parts of FabMo on the intel edison.
+This is a yocto layer for furnishing the working parts of FabMo on the intel edison. 
 
 
-#Build Instruction
+# Build Instruction (Only work on Linux)
 - Download the [yocto distribution sources](http://downloadmirror.intel.com/25028/eng/edison-src-ww25.5-15.tgz)
 - Untar it
 - `cd edison src`
@@ -21,7 +21,7 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 - `bitbake fabmo-image`
 - Pray for it to build.
 
-#Build Instruction for 3.5 [WORK IN PROGRESS]
+# Build Instruction for 3.5 [WORK IN PROGRESS]
 - Download the [yocto distribution sources](https://iotdk.intel.com/src/3.5/edison/iot-devkit-yp-poky-edison-20160606.zip)
 - Unzip it
 - create a build folder named 'edison-src'
@@ -42,7 +42,7 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 - Pray for it to build.
 
 
-#Dependencies
-##Ubuntu
+# Dependencies
+## Ubuntu
 - makeinfo (`sudo apt-get install texinfo`)
 - chrpath (`sudo apt-get install chrpath`)
