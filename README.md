@@ -48,3 +48,4 @@ you are ready to flash ! (files in `./toFlash`)
 ## Ubuntu
 - makeinfo (`sudo apt-get install texinfo`)
 - chrpath (`sudo apt-get install chrpath`)
+- g++-multilib (`sudo apt-get install g++-multilib`)
