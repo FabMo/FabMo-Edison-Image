@@ -13,8 +13,8 @@ ln -s /home/root /root
 echo "Marking the rootfs as READ ONLY"
 sed -r "s:rootfs\\s+/\\s+auto\\s+:&ro,errors=remount-ro,:" < /etc/fstab > /etc/fstab.ro; mv /etc/fstab.ro /etc/fstab
 
-echo "Enable the rootfs RAM overlay service"
-systemctl enable rootfs-overlay
+#echo "Enable the rootfs RAM overlay service"
+#systemctl enable rootfs-overlay
 
 echo "Create site-specific installation files"
 mkdir -p /opt/fabmo/fmus

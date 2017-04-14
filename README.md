@@ -30,7 +30,7 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 - `ln -s meta-intel-edison/utils/Makefile.mk Makefile`
 - `git clone git://git.openembedded.org/meta-openembedded`
 - `git clone git://github.com/imyller/meta-nodejs.git`
-- `git clone https://github.com/FabMo/FabMo-Edison-Image.git`
+- `git clone https://github.com/FabMo/FabMo-Edison-Image.git` (change branch if needed) 
 - `make setup`
 - `cd out/current`
 - `source poky/oe-init-build-env`
@@ -38,8 +38,10 @@ This is a yocto layer for furnishing the working parts of FabMo on the intel edi
 - add theses lines to the BBLAYERS section :
   - `/home/user/FabMo-Build/edison-src/meta-nodejs \`
   - `/home/user/FabMo-Build/edison-src/FabMo-Edison-Image \`
-- `bitbake fabmo-image`
+- `bitbake fabmo-image u-boot`
 - Pray for it to build.
+- `../../..FabMo-Edison-Image/utils/postBuild.sh .`
+you are ready to flash ! (files in `./toFlash`)
 
 
 # Dependencies
