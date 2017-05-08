@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 S = "${WORKDIR}/git"
 
-inherit npm
+inherit npm-install
 
 NPM_INSTALL_FLAGS += " --build-from-source"
 

@@ -2,11 +2,11 @@
 
 # On ubuntu you need to install libqt4-core:i386 and libqt4-gui:i386 to run this script
 
-top_repo_dir=$(dirname $(dirname $(dirname $(readlink -f $0))))
+top_repo_dir=$(dirname $(dirname $(readlink -f $0)))/edison-src
 
 build_dir=""
 if [ $# -eq 0 ]; then
-  build_dir=$top_repo_dir/build
+  build_dir=$top_repo_dir/out/current/build
 else
   build_dir=$1
 fi
