@@ -15,6 +15,9 @@ release-windows: image
 	cd build_tools/dfu-util-x86; zip -ru ../../fabmo-image-latest-windows.zip *
 	cd build_tools; zip -ru ../fabmo-image-latest-windows.zip flash.bat
 
+flash:
+	cd toFlash \
+	./flashall.sh
 clean:
 	bitbake -c cleanall fabmo-engine fabmo-updater
 	rm -rf toFlash fabmo-image-latest.zip fabmo-image-latest-windows.zip
