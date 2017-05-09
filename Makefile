@@ -6,7 +6,7 @@ MAKEFILE = $(OUTDIR)/build/Makefile
 
 SH = bash
 
-all: $(BBLAYERS) $(MAKEFILE) instructions
+all: $(BBLAYERS) $(MAKEFILE) build instructions
  
 instructions:
 	@echo ""
@@ -53,5 +53,8 @@ edison-src/FabMo-Edison-Image: | edison-src
 
 clean:
 	rm -rf .dl edison-src
+
+build:
+	ln -s ./edison-src/out/current/build ./build
 
 .PHONY: clean instructions
