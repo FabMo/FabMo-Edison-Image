@@ -79,7 +79,7 @@ cp -R $top_repo_dir/meta-intel-edison/utils/flash/helper $build_dir/toFlash/help
 echo $build_dir
 # Look for mkimage tool path
 ubootdir=$top_repo_dir/u-boot
-mkimage_tool_path=""
+mkimage_tool_path="/usr/bin/mkimage"
 if [ -a $ubootdir ]; then
     mkimage_tool_path=$(find $top_repo_dir/u-boot -name mkimage)
 fi

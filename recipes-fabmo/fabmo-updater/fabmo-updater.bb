@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 S = "${WORKDIR}/git"
 
-inherit npm
+inherit npm-base
 
 NPM_INSTALL_FLAGS += " --build-from-source"
 
@@ -19,8 +19,8 @@ do_fetch() {
 	git clone https://github.com/FabMo/FabMo-Updater.git ${S}
 	cd ${S}
 	git fetch origin --tags
-	git fetch origin release:release
-	git checkout release
+	git fetch origin edge:edge
+	git checkout edge
 	VERSION=`git describe`
 	echo "{\"number\" : \"$VERSION\" }" > version.json
 	rm -rf .git
