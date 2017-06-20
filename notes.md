@@ -7,5 +7,3 @@ Services to be disabled:
  * mdns
  * edison_config
  * mosquitto
-
-`termsize` should be installed, and an invocation added to `/etc/profile`

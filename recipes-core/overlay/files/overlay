@@ -28,6 +28,7 @@ do_add() {
 
 do_rm() {
 	if mount | grep -q "$MERGED_ROOT$1"; then
+		kill -9 `lsof -t $1`
 		umount $MERGED_ROOT$1
 		umount $1
 		rm -rf $OVERLAY_ROOT$1 $MERGED_ROOT$1

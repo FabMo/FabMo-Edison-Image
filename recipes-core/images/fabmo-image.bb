@@ -161,7 +161,7 @@ IMAGE_INSTALL += "mraa-dev"
 IMAGE_INSTALL += "mraa-doc"
 
 # UPM
-IMAGE_INSTALL += "upm-dev"
+#IMAGE_INSTALL += "upm-dev"
 
 # INTEL MCU FW
 IMAGE_INSTALL += "mcu-fw-load"
