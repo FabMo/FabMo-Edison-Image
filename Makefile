@@ -25,10 +25,10 @@ $(MAKEFILE): intel-setup
 	cp support/Makefile $(MAKEFILE)
 	
 $(BBLAYERS): intel-setup
-	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\"}' $(BBLAYERS) > .dl/bblayers.conf
+	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\\n  $(SRCDIR)/meta-primiano-dma \\"}' $(BBLAYERS) > .dl/bblayers.conf
 	cp .dl/bblayers.conf $(BBLAYERS)
  
-intel-setup: | edison-src/meta-openembedded edison-src/meta-nodejs edison-src/FabMo-Edison-Image
+intel-setup: | edison-src/meta-openembedded edison-src/meta-nodejs edison-src/FabMo-Edison-Image edison-src/meta-primiano-dma
 	cd $(SRCDIR); \
 	make setup; \
 	cd $(OUTDIR); \
@@ -50,6 +50,10 @@ edison-src/meta-nodejs: | edison-src
 edison-src/FabMo-Edison-Image: | edison-src
 	cd edison-src; \
 	ln -s `git rev-parse --show-toplevel` ./FabMo-Edison-Image
+
+edison-src/meta-primiano-dma: | edison-src
+	cd edison-src; \
+	git clone git://github.com/drcrallen/meta-primiano-dma.git
 
 clean:
 	rm -rf .dl edison-src
