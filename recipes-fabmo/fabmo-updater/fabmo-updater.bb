@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
  
 #SRC_URI = "git://github.com/FabMo/FabMo-Updater.git;protocol=https"
 #SRCREV = "${AUTOREV}"
-PV = "1.4.53"
+PV = "1.4.56"
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm bossa factory-reset"
 
@@ -55,6 +55,10 @@ do_install() {
     install -m 0755 ${THISDIR}/files/updater_update.sh ${D}/usr/lib/fabmo/    
     install -m 0755 ${THISDIR}/files/enter_ap_mode.sh ${D}/usr/lib/fabmo/    
     install -m 0755 ${THISDIR}/files/fabmo-factory-reset ${D}${bindir}    
+    
+    # Install the firmware update fmu into the /usr/lib/fabmo directory
+    install -d ${D}/usr/lib/fabmo/fmus    
+    install -m 0755 ${THISDIR}/files/01-firmware-update.fmu ${D}/usr/lib/fabmo/fmus
     
     # Link the /opt/fabmo configuration path to the home directory (where configs are actually stored)
     install -d ${D}/opt
