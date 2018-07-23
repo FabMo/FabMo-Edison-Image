@@ -1,56 +1,54 @@
 DESCRIPTION="The FabMo Engine Service"
 LICENSE = "Apache-2.0"
- 
-#SRC_URI = "git://github.com/Fabmo/FabMo-Engine.git;protocol=https"
-#SRCREV = "${AUTOREV}"
-PV = "1.4.58"
+LIC_FILES_CHKSUM = "file://${THISDIR}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+
+PV = "1.4.62"
+
+#SRC_URI += "file://latest.js"
 
 DEPENDS = "dbus-glib expat fabmo-updater"
 RDEPENDS_${PN} = "git bash nodejs-npm"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-
-S = "${WORKDIR}/git"
-
-inherit npm-install
-
-NPM_INSTALL_FLAGS += " --build-from-source"
-
 do_fetch() {
-	git clone https://github.com/FabMo/FabMo-Engine.git ${S}
-	cd ${S}
-	git fetch origin --tags
-	git fetch origin release:release
-	git fetch origin rc:rc
-	git checkout release
-#	git checkout rc
-	VERSION=`git describe`
-	echo "{\"number\" : \"$VERSION\" }" > version.json
-	rm -rf .git
-        touch install_token
+	cd ${WORKDIR}
+	PACKAGE=`node ${THISDIR}/files/latest.js`
+	wget ${PACKAGE} -O package.fmp
 }
 
 do_unpack() {
 	echo "Unpacking"
-}
-
-do_compile() {
-    oe_runnpm install
+	cd ${WORKDIR}
+    	tar -xvzf package.fmp
+	mkdir -p ./fabmo-engine-files
+	tar -xvzf files.tar.gz -C ./fabmo-engine-files
+	find ./fabmo-engine-files -name '.debug' -print0 | xargs -0 -n 1 rm -rf
 }
 
 do_clean() {
-	rm -rf ${S}
+	rm -rf ${WORKDIR}/*
 }
 
 do_install() {
+    #install -d ${D}/usr/lib/fabmo
+    #install -d ${D}/fabmo
+    #install -d ${D}/fabmo/site
+    #install -d ${D}${systemd_unitdir}/system
+    #mv ${S}/node_modules/serialport/build/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/Release/node-v11-linux-ia32 || true
+    #cp -r ${S} ${D}/fabmo/engine
+    #install -m 0644 ${S}/files/fabmo.service ${D}${systemd_unitdir}/system/
+    #tar -cvjf ${D}/usr/lib/fabmo/engine-factory.tar.bz2 -C ${D}/fabmo/engine --exclude='*install_token' .
+
     install -d ${D}/usr/lib/fabmo
     install -d ${D}/fabmo
+    install -d ${D}/fabmo/engine
     install -d ${D}/fabmo/site
     install -d ${D}${systemd_unitdir}/system
-    mv ${S}/node_modules/serialport/build/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/Release/node-v11-linux-ia32 || true
-    cp -r ${S} ${D}/fabmo/engine
-    install -m 0644 ${S}/files/fabmo.service ${D}${systemd_unitdir}/system/
-    tar -cvjf ${D}/usr/lib/fabmo/engine-factory.tar.bz2 -C ${D}/fabmo/engine --exclude='*install_token' .
+    #mv ${S}/node_modules/serialport/build/Release/node-v11-linux-i586 ${S}/node_modules/serialport/build/Release/node-v11-linux-ia32 || true
+	    
+    cp -r ${WORKDIR}/fabmo-engine-files/* ${D}/fabmo/engine
+
+    install -m 0644 ${D}/fabmo/engine/files/fabmo.service ${D}${systemd_unitdir}/system/
+    tar -cjf ${D}/usr/lib/fabmo/engine-factory.tar.bz2 -C ${D}/fabmo/engine --exclude='*install_token' .
 }
 
 inherit systemd
