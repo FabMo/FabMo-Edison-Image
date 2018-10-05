@@ -1,6 +1,6 @@
 var http = require('http')
 try {
-http.get("http://gofabmo.org/manifest/packages-rc.json", function(res) {
+http.get("http://gofabmo.org/manifest/packages.json", function(res) {
 	body = ""	
 	res.on("data", function(d) { body += d; });
 	res.on("end", function() {

@@ -2,7 +2,7 @@ DESCRIPTION="The FabMo Updater Service"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${THISDIR}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-PV = "1.4.62"
+PV = "1.4.65"
 
 DEPENDS = "dbus-glib expat"
 RDEPENDS_${PN} = "git bash nodejs-npm bossa factory-reset"
@@ -18,6 +18,7 @@ do_fetch() {
 do_unpack() {
 	echo "Unpacking"
 	cd ${WORKDIR}
+	rm -rf ./fabmo-updater-files
 	mkdir ./fabmo-updater-files
         tar -xvzf package.fmp
         tar -xvzf files.tar.gz -C ./fabmo-updater-files 
@@ -73,3 +74,4 @@ SYSTEMD_SERVICE_${PN} = "fabmo-updater.service"
 FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home ${bindir}"
 
 PACKAGES = "${PN}"
+INSANE_SKIP_${PN} += "debug-files"

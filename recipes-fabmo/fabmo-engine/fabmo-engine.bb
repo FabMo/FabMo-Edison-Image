@@ -2,7 +2,7 @@ DESCRIPTION="The FabMo Engine Service"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${THISDIR}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-PV = "1.4.62"
+PV = "1.4.65"
 
 #SRC_URI += "file://latest.js"
 
@@ -19,6 +19,7 @@ do_unpack() {
 	echo "Unpacking"
 	cd ${WORKDIR}
     	tar -xvzf package.fmp
+	rm -rf ./fabmo-engine-files
 	mkdir -p ./fabmo-engine-files
 	tar -xvzf files.tar.gz -C ./fabmo-engine-files
 	find ./fabmo-engine-files -name '.debug' -print0 | xargs -0 -n 1 rm -rf
@@ -59,3 +60,5 @@ SYSTEMD_SERVICE_${PN} = "fabmo.service"
 FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr"
 
 PACKAGES = "${PN}"
+
+INSANE_SKIP_${PN} += "debug-files"

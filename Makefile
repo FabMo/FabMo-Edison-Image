@@ -3,10 +3,11 @@ SRCDIR = $(BASEDIR)/edison-src
 OUTDIR = $(SRCDIR)/out/current
 BBLAYERS = $(OUTDIR)/build/conf/bblayers.conf
 MAKEFILE = $(OUTDIR)/build/Makefile
+BUILDTOOLS = $(OUTDIR)/build/build-tools
 
 SH = bash
 
-all: $(BBLAYERS) $(MAKEFILE) build instructions
+all: $(BBLAYERS) $(MAKEFILE) $(BUILDTOOLS) build instructions
  
 instructions:
 	@echo ""
@@ -21,8 +22,11 @@ instructions:
 	@echo "Good Luck!"
 	@echo ""
 
+$(BUILDTOOLS): intel-setup
+	cp -R support/build-tools $(BUILDTOOLS)
+
 $(MAKEFILE): intel-setup
-	cp support/Makefile $(MAKEFILE)
+	cp support/Makefile $(BUILDTOOLS)
 	
 $(BBLAYERS): intel-setup
 	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\"}' $(BBLAYERS) > .dl/bblayers.conf
