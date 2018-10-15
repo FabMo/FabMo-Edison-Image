@@ -8,7 +8,7 @@ BUILDTOOLS = $(OUTDIR)/build/build-tools
 SH = bash
 
 all: $(BBLAYERS) $(MAKEFILE) $(BUILDTOOLS) build instructions
- 
+
 instructions:
 	@echo ""
 	@echo "The Intel Edison build environment has been prepared to create the FabMo image."
@@ -23,6 +23,7 @@ instructions:
 	@echo ""
 
 $(BUILDTOOLS): intel-setup
+	rm -rf $(BUILDTOOLS)
 	cp -R support/build-tools $(BUILDTOOLS)
 
 $(MAKEFILE): intel-setup
@@ -39,9 +40,7 @@ intel-setup: | edison-src/meta-openembedded edison-src/meta-nodejs edison-src/Fa
 	$(SH) -c '. poky/oe-init-build-env'	
 
 edison-src:
-	mkdir -p .dl
-	wget -P .dl http://downloadmirror.intel.com/25028/eng/edison-src-ww25.5-15.tgz
-	tar -xvzf .dl/edison-src-ww25.5-15.tgz
+	tar -xvzf ./edison-src-ww25.5-15.tgz
 
 edison-src/meta-openembedded: | edison-src
 	cd edison-src; \
