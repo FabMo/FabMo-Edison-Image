@@ -77,6 +77,6 @@ INSANE_SKIP_${PN} += "debug-files"
 inherit useradd
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} - "-d /home/fabmo -r -s /bin/bash fabmo"
+USERADD_PARAM_${PN} = "-d /home/fabmo -r -s /bin/bash fabmo"
 
 FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home ${bindir}"
