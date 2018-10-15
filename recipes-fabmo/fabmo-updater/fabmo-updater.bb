@@ -71,7 +71,12 @@ inherit systemd
 SYSTEMD_AUTO_ENABLE = "enable"
 SYSTEMD_SERVICE_${PN} = "fabmo-updater.service"
 
-FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home ${bindir}"
-
 PACKAGES = "${PN}"
 INSANE_SKIP_${PN} += "debug-files"
+
+inherit useradd
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} - "-d /home/fabmo -r -s /bin/bash fabmo"
+
+FILES_${PN} = "${systemd_unitdir}/system /fabmo /opt /usr /home ${bindir}"
