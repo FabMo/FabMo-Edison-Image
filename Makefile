@@ -30,8 +30,8 @@ $(MAKEFILE): intel-setup
 	cp support/Makefile $(BUILDTOOLS)
 	
 $(BBLAYERS): intel-setup
-	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\"}' $(BBLAYERS) > .dl/bblayers.conf
-	cp .dl/bblayers.conf $(BBLAYERS)
+	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\"}' $(BBLAYERS) > /tmp/bblayers.conf
+	cp /tmp/bblayers.conf $(BBLAYERS)
  
 intel-setup: | edison-src/meta-openembedded edison-src/meta-nodejs edison-src/FabMo-Edison-Image
 	cd $(SRCDIR); \
@@ -55,7 +55,7 @@ edison-src/FabMo-Edison-Image: | edison-src
 	ln -s `git rev-parse --show-toplevel` ./FabMo-Edison-Image
 
 clean:
-	rm -rf .dl edison-src
+	rm -rf edison-src
 
 build:
 	ln -s ./edison-src/out/current/build ./build
