@@ -27,7 +27,7 @@ $(BUILDTOOLS): intel-setup
 	cp -R support/build-tools $(BUILDTOOLS)
 
 $(MAKEFILE): intel-setup
-	cp support/Makefile $(BUILDTOOLS)
+	cp support/Makefile $(MAKEFILE)
 	
 $(BBLAYERS): intel-setup
 	awk '{print $0}/.*meta-arduino.*/{print "  $(SRCDIR)/meta-nodejs \\\n  $(SRCDIR)/FabMo-Edison-Image \\"}' $(BBLAYERS) > /tmp/bblayers.conf
@@ -60,4 +60,7 @@ clean:
 build:
 	ln -s ./edison-src/out/current/build ./build
 
-.PHONY: clean instructions
+container:
+	docker/build.sh
+
+.PHONY: clean container instructions
