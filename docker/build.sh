@@ -6,7 +6,7 @@ set -x
 
 cd $(dirname $0)
 
-remove all stopped docker sessions
+#remove all stopped docker sessions
 sessions=$(docker ps -a -q -f status=exited)
 if [ "x$session" != "x" ]; then
     docker rm -v $(docker ps -a -q -f status=exited)
@@ -25,7 +25,6 @@ docker build --tag edison/ubuntu-build ubuntu-build
 docker build --tag edison/user edison-user
 
 #The Edison source code
-#docker build --tag edison/source edison-source
 docker build --tag edison/source fabmo-edison-source
 
 # Prepare the build and prefetch sources
@@ -37,6 +36,7 @@ docker build --tag edison/image edison-image
 docker run edison/image
 CONTAINERID=$(docker ps -alq)
 echo "CONTAINER: " $CONTAINERID
-docker cp $CONTAINERID\:/home/edison/fabmo-edison-image/edison-src/out/current/build/release.zip ./release.zip
-docker cp $CONTAINERID\:/home/edison/fabmo-edison-image/edison-src/out/current/build/release-windows.zip ./release-windows.zip
+mkdir -p ../dist
+docker cp $CONTAINERID\:/home/edison/fabmo-edison-image/edison-src/out/current/build/fabmo-image-latest.zip ../dist/fabmo-image-latest.zip
+docker cp $CONTAINERID\:/home/edison/fabmo-edison-image/edison-src/out/current/build/fabmo-image-latest-windows.zip ../dist/fabmo-image-latest-windows.zip
 
