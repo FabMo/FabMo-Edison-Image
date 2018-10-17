@@ -52,3 +52,12 @@ make
 docker system prune -a
 ```
 
+# Other Useful Info
+If you get into modifying the recipes and images, or you're retargeting for another platform, there are lots of sources of information:
+ * https://www.yoctoproject.org/learn/books/
+ * https://www.yoctoproject.org/docs/ (Development and tool manuals are of specific interest)
+ * Yocto project has a very active IRC channel where people are helpful (and can pitch in on issues specific to the older distribution)
+ * https://wiki.yoctoproject.org/wiki/Yocto_Project:Community_portal
+ 
+
+
