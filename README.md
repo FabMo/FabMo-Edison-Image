@@ -29,6 +29,7 @@ To explain the system by way of example, here are some recipes for doing typical
 
 ### Create the docker container and build the FabMo image
 ```
+# If you're starting from scratch, this will take hours even on a fast machine
 make container
 ```
 
