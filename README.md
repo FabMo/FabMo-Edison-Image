@@ -25,6 +25,7 @@ Yocto is an impossibly large and complex build system.  In lieu of an explanatio
  * `/edison-src/out/current/poky/oe-init-build-env.sh` - This is the script that configures the openembedded build environment.  It configures some paths and sets up some environment variables that are needed by the build process.  You must `source` this script (which is different than running it) before attempting to build with `bitbake`
  * `/edison-src/out/current/build` - This is the build directory.  The build takes place here, which can be initiated by running `make` from within this directory, after `source`ing the `oe-init-build-env.sh` described above.
  * `/edison-src/out/current/build/toFlash` - This is the directory where the assembled build products go.  A flashing script is included here, along with all image files.
+ * `/dist` - In the host environment (the one in which you create a build container) if you create the build container with `make container` or run the `docker/build.sh` script, the build products (the `fabmo-image-latest.zip` and `fabmo-image-latest-windows.zip`) will be placed in this directory when the build is complete.
 
 # Some recipes
 To explain the system by way of example, here are some recipes for doing typical build tasks.
