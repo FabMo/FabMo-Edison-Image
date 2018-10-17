@@ -31,13 +31,13 @@ Yocto is an impossibly large and complex build system.  In lieu of an explanatio
 To explain the system by way of example, here are some recipes for doing typical build tasks.
 
 ### Create the docker container and build the FabMo image
-```
+```bash
 # If you're starting from scratch, this will take hours even on a fast machine
 make container
 ```
 
 ### Open a shell in the created build container and perform another build
-```
+```bash
 # Instantiate the image build container and open a shell inside it
 docker run -it edison/edison-image /bin/bash
 # Use the OpenEmbedded init script to prepare the shell environment to build the image
@@ -47,7 +47,7 @@ make
 ```
 
 ### Purge your system of all containers and images
-```
+```bash
 # This will basically start you from scratch, container-wise.
 docker system prune -a
 ```
