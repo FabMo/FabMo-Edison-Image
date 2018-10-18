@@ -20,6 +20,8 @@ If you use `build.sh` or the top level Makefile (which calls `build.sh`) to crea
 # Important files and directories
 Yocto is an impossibly large and complex build system.  In lieu of an explanation of how it works, (please see the yocto project documentation for that) a list of important files and directories are provided to give a sense of how to interact with the build.
  * `Makefile` - The makefile in the top level directory is responsible for setting up the build environment.  It unpacks Intel's sources, fetches the appropriate version of the OpenEmbedded build system and several layers that are needed, and copies some files and creates some symbolic links that are needed to make the build work.
+ * `/docker/` - Contains the dockerfiles needed to construct the build container
+ * `/docker/build.sh` - Build script that assembles the build container
  * `support/Makefile` - This makefile is used to actually run the build and process its output.  The setup Makefile described above copies it to the build directory when the environment is configured so that it can be used to initiate the build.
  * `/edison-src/` - This directory is where the intel sources live, unpacked from `edison-src-ww25.5-15.tgz`
  * `/edison-src/out/current/poky/oe-init-build-env.sh` - This is the script that configures the openembedded build environment.  It configures some paths and sets up some environment variables that are needed by the build process.  You must `source` this script (which is different than running it) before attempting to build with `bitbake`
